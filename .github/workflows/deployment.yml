@@ -15,6 +15,7 @@ jobs:
       - name: Run tests
         run: npm test
   linting:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -26,13 +27,13 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run linting
-        run: npm run lint
+        run: npm lint
 
   deploy:
-    needs: test
+    needs: linting
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
         uses: actions/checkout@v6.0.2
       - name: Deploy to Production
-        run: echo "Deploying to production..."
+        run: npm build
