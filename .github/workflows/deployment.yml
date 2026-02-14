@@ -27,13 +27,21 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run linting
-        run: npm lint
+        run: npm run lint
 
-  deploy:
+  building:
     needs: linting
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
         uses: actions/checkout@v6.0.2
       - name: Deploy to Production
-        run: npm build
+        run: npm run build
+  deploy:
+    needs: building
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v6.0.2
+      - name: Deploy to Production
+        run: echo "Deploying to production..."
