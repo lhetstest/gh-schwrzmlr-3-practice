@@ -1,0 +1,14 @@
+name: Issue listener
+on:
+  issues:
+    types: [opened, edited, closed]
+jobs:
+  issue_listener:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log issue event
+        run: |
+          echo "Issue event triggered: ${{ github.event.action }}
+          - Issue #${{ github.event.issue.number }}
+          - Title: ${{ github.event.issue.title }}"
+
