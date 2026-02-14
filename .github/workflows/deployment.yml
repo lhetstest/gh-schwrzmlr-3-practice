@@ -49,5 +49,11 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v6.0.2
+      - name: Set up Node.js
+        uses: actions/setup-node@v6.0.0
+        with:
+          node-version: 24
+      - name: Install dependencies
+        run: npm ci
       - name: Deploy to Production
         run: echo "Deploying to production..."
